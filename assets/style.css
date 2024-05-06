@@ -1,0 +1,19 @@
+.caja-titulo {
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.div-tabla {
+    margin-top: 2rem;
+}
+
+#tabla {
+    text-align: center;
+    min-width: 0px;
+    max-width: auto;
+}
+
+h1, h3 {
+    text-align: center;
+}
+

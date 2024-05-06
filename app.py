@@ -18,7 +18,7 @@ def grafico1():
 fig1 = grafico1()
 
 
-# Grafico de Barras: Puntuaciones Metascore
+# Grafico de Torta: Puntuaciones Metascore
 def grafico2():
     meta_score = df['Metascore'].value_counts()
     fig2 = px.pie(values = meta_score.values, names = meta_score.index, title = 'Metascore Promedio')
@@ -40,23 +40,26 @@ fig3 = grafico3()
 
 
 
-app.layout = html.Div(children=[
-    html.H1(children='Visualización de Datos', style={'textAlign': 'center'}),
-
-    html.H3(children='DataSet: Mejores Video Juegos de todos los tiempos'),
-
-    dash_table.DataTable(
-        id='tabla',
-        columns=[{"name": i, "id": i} for i in df.columns],
-        data=df.to_dict('records'), 
-        page_size=10,
-        style_cell={
-            'textAlign': 'center',  
-            'minWidth': '0px',      
-            'maxWidth': '180px',    
-        },
-    ),
+app.layout = html.Div([
+    html.Div(
+        className='caja-titulo',
+        children=[
+            html.H1('Visualización de Datos')
+        ]),
     
+    html.Div(
+        className='div-tabla',
+        children=[
+            html.H3('DataSet: Mejores Video Juegos de todos los tiempos'),
+            dash_table.DataTable(
+                id='tabla',
+                columns=[{"name": i, "id": i} for i in df.columns],
+                data=df.to_dict('records'), 
+                page_size=10,
+                style_cell={'textAlign': 'center', 'minWidth': '0px', 'maxWidth': '180px'}),
+        ]
+    ),
+   
     dcc.Graph(id='graph-consolas', figure=fig1),
 
     dcc.Graph(id='graph-metascore', figure=fig2),
