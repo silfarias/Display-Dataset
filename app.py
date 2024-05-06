@@ -27,6 +27,7 @@ def grafico2():
 fig2 = grafico2()
 
 
+# Ggrafico de Barras: Cantidad de juegos lanzados por años
 def grafico3():
     df['Years'] = pd.DatetimeIndex(df['Date']).year
     top15_años = df['Years'].value_counts()[:15]
@@ -37,10 +38,12 @@ def grafico3():
 
 fig3 = grafico3()
 
+
+
 app.layout = html.Div(children=[
     html.H1(children='Visualización de Datos', style={'textAlign': 'center'}),
 
-    html.H3(children='DataSet: Mejores Video Juegos de todos los tiempos', style={}),
+    html.H3(children='DataSet: Mejores Video Juegos de todos los tiempos', style={'textAling': 'center'}),
 
     dash_table.DataTable(
         id='tabla',
@@ -51,38 +54,16 @@ app.layout = html.Div(children=[
             'textAlign': 'center',  
             'minWidth': '0px',      
             'maxWidth': '180px',    
-            'whiteSpace': 'normal', 
-            'overflow': 'hidden',   
-            'textOverflow': 'ellipsis', 
         },
     ),
+    
+    dcc.Graph(id='graph-consolas', figure=fig1),
 
-    html.Button('Mostrar Gráfico', id='boton-mostrar-grafico'), # Boton para mostrar grafico de barras
-    html.Div(id='contenedor-grafico', children=[]), # Caja donde se cargará el gráfico de consolas
+    dcc.Graph(id='graph-metascore', figure=fig2),
 
-    dcc.Graph(id='graph-content', figure=fig2), # Dibujar grafico de torta
-
-    dcc.Graph(id='graph-years', figure=fig3) # Dibujar grafico de barras horizontales
+    dcc.Graph(id='graph-years', figure=fig3)
 
 ])
-
-
-@app.callback(
-    [Output(component_id='contenedor-grafico', component_property='style'),
-    Output(component_id='contenedor-grafico', component_property='children')],
-    Input(component_id='boton-mostrar-grafico', component_property='n_clicks')
-)
-
-
-def mostrar_grafico1(click):
-    if click:
-        style = {'display': 'block'}
-        graph = dcc.Graph(id='grafico_barras_consola', figure=fig1)
-    else:
-        style = {'display': 'none'}
-        graph = None
-    return style, graph
-
 
 
 app.run_server(debug=True)
