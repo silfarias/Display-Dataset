@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, dash_table, Input, Output
+from dash import Dash, html, dcc, dash_table
 import plotly.express as px
 import pandas as pd
 
@@ -32,7 +32,7 @@ def grafico3():
     df['Years'] = pd.DatetimeIndex(df['Date']).year
     top15_años = df['Years'].value_counts()[:15]
     fig3 = px.bar(y = top15_años.values, x = top15_años.index, 
-            text = top15_años.values, title = 'Top 15 años con mejores juegos')
+            title = 'Top 15 años con mejores juegos')
     fig3.update_layout(xaxis_title = "Año", yaxis_title = "Count")
     return fig3
 
@@ -43,7 +43,7 @@ fig3 = grafico3()
 app.layout = html.Div(children=[
     html.H1(children='Visualización de Datos', style={'textAlign': 'center'}),
 
-    html.H3(children='DataSet: Mejores Video Juegos de todos los tiempos', style={'textAling': 'center'}),
+    html.H3(children='DataSet: Mejores Video Juegos de todos los tiempos'),
 
     dash_table.DataTable(
         id='tabla',
