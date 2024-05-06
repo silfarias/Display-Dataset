@@ -20,14 +20,22 @@ fig1 = grafico1()
 
 # Grafico de Barras: Puntuaciones Metascore
 def grafico2():
-    top_games = df['Metascore'].value_counts().head(15)
-    fig2 = px.bar(x=top_games.index, y=top_games.values, title='Puntuación Metascore',
-            labels={'x': 'Metascore', 'y': 'Número de Juegos'}, color_discrete_sequence=['green'])
+    meta_score = df['Metascore'].value_counts()
+    fig2 = px.pie(values = meta_score.values, names = meta_score.index, title = 'Metascore Promedio')
     return fig2
 
 fig2 = grafico2()
 
 
+def grafico3():
+    df['Years'] = pd.DatetimeIndex(df['Date']).year
+    top15_años = df['Years'].value_counts()[:15]
+    fig3 = px.bar(y = top15_años.values, x = top15_años.index, 
+            text = top15_años.values, title = 'Top 15 años con mejores juegos')
+    fig3.update_layout(xaxis_title = "Año", yaxis_title = "Count")
+    return fig3
+
+fig3 = grafico3()
 
 app.layout = html.Div(children=[
     html.H1(children='Visualización de Datos', style={'textAlign': 'center'}),
@@ -52,7 +60,9 @@ app.layout = html.Div(children=[
     html.Button('Mostrar Gráfico', id='boton-mostrar-grafico'), # Boton para mostrar grafico de barras
     html.Div(id='contenedor-grafico', children=[]), # Caja donde se cargará el gráfico de consolas
 
-    dcc.Graph(id='graph-content', figure=fig2)
+    dcc.Graph(id='graph-content', figure=fig2), # Dibujar grafico de torta
+
+    dcc.Graph(id='graph-years', figure=fig3) # Dibujar grafico de barras horizontales
 
 ])
 
