@@ -41,9 +41,15 @@ fig2 = grafico2()
 def grafico3():
     df['Years'] = pd.DatetimeIndex(df['Date']).year
     top15_años = df['Years'].value_counts()
+
+    # Ordenar el índice de menor a mayor según el año
+    top15_años = top15_años.sort_index()
+    # Convertir el índice a formato de cadena (string)
+    top15_años.index = top15_años.index.astype(str)
+
+
     fig3 = px.bar(y=top15_años.values, x=top15_años.index, text=top15_años.values,
             title = 'Años con Mejores Juegos', labels={'x': 'Año', 'y': 'Cantidad de juegos'})
-    # fig3.update_layout(xaxis_title = "Año", yaxis_title = "Count")
     return fig3
 
 fig3 = grafico3()
