@@ -1,6 +1,15 @@
+body {
+    background-color: #e8bcb9;
+    font-family: 'Poppins', sans-serif;
+} 
+
 .caja-titulo {
-    border: 1px solid black;
+    border: 1px solid rgb(255, 255, 255);
     border-radius: 8px;
+    background: linear-gradient(70deg, #451952, #ca5768);
+    font-size: 18px;
+    color: white;
+    box-shadow: 4px 4px 4px 3px rgba(0, 0, 0, 0.2);
 }
 
 .div-tabla {
@@ -9,11 +18,37 @@
 
 #tabla {
     text-align: center;
-    min-width: 0px;
-    max-width: auto;
 }
 
-h1, h3 {
+h1, h2, h3 {
     text-align: center;
 }
 
+p {
+    text-align: center;
+    font-size: 18px;
+}
+
+.img-mejor-juego {
+    width: 230px; 
+    height: 230px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid black;
+}
+
+.caja-imagenes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4rem;
+    margin-bottom: 2rem;
+}
+/* .color {
+    #1d1a39
+    #451952
+    #662549
+    #ae4454
+    #f39f5a
+    #e8bcb9
+} */
